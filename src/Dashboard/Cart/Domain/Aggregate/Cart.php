@@ -16,16 +16,16 @@ class Cart extends AgregateRoot
 
     private ?CartUser $user;
 
-    private \DateTimeInterface $created_at;
+    private \DateTimeInterface $createdAt;
 
-    private \DateTimeInterface $updated_at;
+    private \DateTimeInterface $updatedAt;
 
     private bool $active;
 
     private function __construct()
     {
         $this->items = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
         $this->active = true;
     }
 
@@ -71,7 +71,7 @@ class Cart extends AgregateRoot
      */
     public function getCreatedAt(): \DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -79,7 +79,7 @@ class Cart extends AgregateRoot
      */
     public function getUpdatedAt(): \DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
