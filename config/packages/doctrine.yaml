@@ -29,6 +29,13 @@ doctrine:
                 prefix: 'App\Dashboard\User\Domain\Agregate'
                 alias: dashboard.user
 
+            Dashboard\Cart:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Dashboard/Cart/Infrastructure/Mapping/Doctrine'
+                prefix: 'App\Dashboard\Cart\Domain\Aggregate'
+                alias: dashboard.cart
+
 when@test:
     doctrine:
         dbal:
