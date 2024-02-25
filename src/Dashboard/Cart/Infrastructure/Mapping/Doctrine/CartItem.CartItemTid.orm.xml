@@ -1,0 +1,5 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <embeddable name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemTid">
+        <field name="value" column="tid" type="string" length="100" />
+    </embeddable>
+</doctrine-mapping>

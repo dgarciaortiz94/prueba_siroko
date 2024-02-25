@@ -1,9 +1,10 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <entity name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem">
+    <entity name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem" table="item">
         <embedded name="id" class="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemId" use-column-prefix="false" />
-        <embedded name="name" class="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemName" use-column-prefix="false" />
-        <embedded name="description" class="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemDescription" use-column-prefix="false" />
-        <embedded name="price" class="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemPrice" use-column-prefix="false" />
+        <embedded name="tid" class="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemTid" use-column-prefix="false" />
+        <many-to-one field="product" target-entity="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProduct">
+            <join-column name="product_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
         <field name="active" column="active" type="boolean" />
     </entity>
 </doctrine-mapping>

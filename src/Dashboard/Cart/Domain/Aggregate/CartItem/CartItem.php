@@ -2,15 +2,15 @@
 
 namespace App\Dashboard\Cart\Domain\Aggregate\CartItem;
 
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProduct;
+
 class CartItem
 {
     private CartItemId $id;
 
-    private CartItemName $name;
+    private string $tid;
 
-    private CartItemDescription $description;
-
-    private CartItemPrice $price;
+    private CartItemProduct $product;
 
     private bool $active;
 
@@ -23,27 +23,11 @@ class CartItem
     }
 
     /**
-     * Get the value of name.
+     * Get the value of tid.
      */
-    public function getName(): CartItemName
+    public function getTid(): string
     {
-        return $this->name;
-    }
-
-    /**
-     * Get the value of description.
-     */
-    public function getDescription(): CartItemDescription
-    {
-        return $this->description;
-    }
-
-    /**
-     * Get the value of price.
-     */
-    public function getPrice(): CartItemPrice
-    {
-        return $this->price;
+        return $this->tid;
     }
 
     /**
@@ -52,5 +36,13 @@ class CartItem
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+    /**
+     * Get the value of product.
+     */
+    public function getProduct(): CartItemProduct
+    {
+        return $this->product;
     }
 }

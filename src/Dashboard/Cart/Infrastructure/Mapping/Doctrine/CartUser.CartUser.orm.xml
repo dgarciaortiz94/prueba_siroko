@@ -1,5 +1,5 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <entity name="App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUser">
+    <entity name="App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUser" table="user">
         <embedded name="id" class="App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUserId" use-column-prefix="false" />
     </entity>
 </doctrine-mapping>

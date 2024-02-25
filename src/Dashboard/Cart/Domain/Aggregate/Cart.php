@@ -31,7 +31,7 @@ class Cart extends AgregateRoot
 
     public static function create(
         CartItem $item,
-        CartUser $user
+        CartUser $user = null
     ): self {
         $self = new Cart();
 

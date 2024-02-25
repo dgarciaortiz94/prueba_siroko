@@ -1,0 +1,5 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <embeddable name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductVariant">
+        <field name="value" column="variant" type="string" length="30" />
+    </embeddable>
+</doctrine-mapping>

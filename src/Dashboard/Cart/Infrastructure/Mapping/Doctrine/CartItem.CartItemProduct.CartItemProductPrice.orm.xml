@@ -1,5 +1,5 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <embeddable name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemPrice">
+    <embeddable name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductPrice">
         <field name="value" column="price" type="float" />
     </embeddable>
 </doctrine-mapping>
