@@ -12,6 +12,8 @@ class CartItem
 
     private CartItemPrice $price;
 
+    private bool $active;
+
     /**
      * Get the value of id.
      */
@@ -42,5 +44,13 @@ class CartItem
     public function getPrice(): CartItemPrice
     {
         return $this->price;
+    }
+
+    /**
+     * Get the value of active
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
     }
 }
