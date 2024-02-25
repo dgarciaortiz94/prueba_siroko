@@ -47,7 +47,7 @@ class CartItem
     }
 
     /**
-     * Get the value of active
+     * Get the value of active.
      */
     public function isActive(): bool
     {
