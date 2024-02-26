@@ -45,7 +45,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of id.
      */
-    public function getId(): string
+    public function id(): string
     {
         return $this->id->value();
     }
@@ -53,7 +53,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of item.
      */
-    public function getItem(): Collection
+    public function items(): Collection
     {
         return $this->items;
     }
@@ -61,7 +61,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of user.
      */
-    public function getUser(): CartUser
+    public function user(): CartUser
     {
         return $this->user;
     }
@@ -69,7 +69,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of created_At.
      */
-    public function getCreatedAt(): \DateTimeInterface
+    public function createdAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -77,7 +77,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of updated_At.
      */
-    public function getUpdatedAt(): \DateTimeInterface
+    public function updatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -85,7 +85,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of active.
      */
-    public function isActive(): bool
+    public function active(): bool
     {
         return $this->active;
     }
