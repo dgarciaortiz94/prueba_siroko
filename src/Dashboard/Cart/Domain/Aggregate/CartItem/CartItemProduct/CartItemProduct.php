@@ -6,63 +6,79 @@ use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartProductMode
 
 class CartItemProduct
 {
-    private CartItemProductId $id;
+    protected CartItemProductId $id;
 
-    private CartItemProductTracingCode $tracingCode;
+    protected CartItemProductTracingCode $tracingCode;
 
-    private CartItemProductVariant $variant;
+    protected CartItemProductVariant $variant;
 
-    private CartItemProductDescription $description;
+    protected CartItemProductDescription $description;
 
-    private CartProductModel $model;
+    protected CartProductModel $model;
 
-    private CartItemProductPrice $price;
+    protected CartItemProductPrice $price;
 
     /**
      * Get the value of id.
      */
-    public function getId(): CartItemProductId
+    public function id(): string
     {
-        return $this->id;
+        return $this->id->value();
     }
 
     /**
      * Get the value of tracingCode.
      */
-    public function getTracingCode(): CartItemProductTracingCode
+    public function tracingCode(): int
     {
-        return $this->tracingCode;
+        return $this->tracingCode->value();
     }
 
     /**
      * Get the value of variant.
      */
-    public function getVariant(): CartItemProductVariant
+    public function variant(): string
     {
-        return $this->variant;
+        return $this->variant->value();
     }
 
     /**
      * Get the value of description.
      */
-    public function getDescription(): CartItemProductDescription
+    public function description(): string
     {
-        return $this->description;
+        return $this->description->value();
     }
 
     /**
-     * Get the value of model.
+     * Get the value of model id.
      */
-    public function getModel(): CartProductModel
+    public function modelId(): string
     {
-        return $this->model;
+        return $this->model->id();
+    }
+
+    /**
+     * Get the value of model name.
+     */
+    public function modelName(): string
+    {
+        return $this->model->name();
+    }
+
+    /**
+     * Get the value of model description.
+     */
+    public function modelDescription(): string
+    {
+        return $this->model->description();
     }
 
     /**
      * Get the value of price.
      */
-    public function getPrice(): CartItemProductPrice
+    public function price(): float
     {
-        return $this->price;
+        return $this->price->value();
     }
 }

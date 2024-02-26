@@ -4,33 +4,33 @@ namespace App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartProdu
 
 class CartProductModel
 {
-    private CartProductModelId $id;
+    protected CartProductModelId $id;
 
-    private CartProductModelName $name;
+    protected CartProductModelName $name;
 
-    private CartProductModelDescription $description;
+    protected CartProductModelDescription $description;
 
     /**
      * Get the value of id.
      */
-    public function getId(): CartProductModelId
+    public function id(): string
     {
-        return $this->id;
+        return $this->id->value();
     }
 
     /**
      * Get the value of name.
      */
-    public function getName(): CartProductModelName
+    public function name(): string
     {
-        return $this->name;
+        return $this->name->value();
     }
 
     /**
      * Get the value of description.
      */
-    public function getDescription(): CartProductModelDescription
+    public function description(): string
     {
-        return $this->description;
+        return $this->description->value();
     }
 }
