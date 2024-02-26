@@ -30,7 +30,10 @@ class RegisterUserTest extends AbstractUserApplicationMock
             ->willReturn($user);
 
         $registerUserCase = new RegisterUserWithApplicationCase(
-            new UserRegister($this->repository(), $this->userFinderByEmail()),
+            new UserRegister(
+                $this->repository(),
+                $this->userFinderByEmail()
+            ),
             $this->eventBus()
         );
 
@@ -59,7 +62,10 @@ class RegisterUserTest extends AbstractUserApplicationMock
         $this->repository();
 
         $registerUserCase = new RegisterUserWithApplicationCase(
-            new UserRegister($this->repository(), $this->userFinderByEmail()), 
+            new UserRegister(
+                $this->repository(),
+                $this->userFinderByEmail()
+            ),
             $this->eventBus()
         );
 
