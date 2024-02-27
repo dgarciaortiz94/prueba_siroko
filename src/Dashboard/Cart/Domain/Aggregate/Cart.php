@@ -42,6 +42,15 @@ class Cart extends AgregateRoot
         return $self;
     }
 
+    public function addProduct(CartItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items()->add($item);
+        }
+
+        return $this;
+    }
+
     /**
      * Get the value of id.
      */
