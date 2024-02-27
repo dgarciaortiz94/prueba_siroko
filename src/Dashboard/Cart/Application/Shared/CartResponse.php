@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Dashboard\Cart\Application\CreateCart;
+namespace App\Dashboard\Cart\Application\Shared;
 
 use App\Shared\Domain\Bus\Command\ICommandResponse;
 
-class CreateCartResponse implements ICommandResponse
+class CartResponse implements ICommandResponse
 {
     private array $items;
 
     public function __construct(
         private string $cartId,
         private float $total,
-        CreateCartItemResponse ...$items
+        CartItemResponse ...$items
     ) {
         $this->items = $items;
     }

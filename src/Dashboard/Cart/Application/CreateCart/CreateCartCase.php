@@ -2,6 +2,8 @@
 
 namespace App\Dashboard\Cart\Application\CreateCart;
 
+use App\Dashboard\Cart\Application\Shared\CartItemResponse;
+use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\Cart;
 use App\Dashboard\Cart\Domain\Services\CartCreator;
 use App\Shared\Domain\Bus\DomainEvent\IDomainEventBus;
@@ -14,7 +16,7 @@ class CreateCartCase
     ) {
     }
 
-    public function __invoke(Cart $cart): CreateCartResponse
+    public function __invoke(Cart $cart): CartResponse
     {
         $cart = $this->cartCreator->__invoke($cart);
 
@@ -24,7 +26,7 @@ class CreateCartCase
         $totalPrice = null;
 
         foreach ($cart->items() as $item) {
-            $itemResponses[] = new CreateCartItemResponse(
+            $itemResponses[] = new CartItemResponse(
                 $item->id(),
                 $item->productTracingCode(),
                 $item->modelName(),
@@ -37,7 +39,7 @@ class CreateCartCase
             $totalPrice += $item->price();
         }
 
-        return new CreateCartResponse(
+        return new CartResponse(
             $cart->id(),
             $totalPrice,
             ...$itemResponses

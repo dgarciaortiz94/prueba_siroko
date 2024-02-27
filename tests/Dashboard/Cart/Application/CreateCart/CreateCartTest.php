@@ -3,7 +3,7 @@
 namespace App\Tests\Dashboard\Cart\Application\CreateCart;
 
 use App\Dashboard\Cart\Application\CreateCart\CreateCartCase;
-use App\Dashboard\Cart\Application\CreateCart\CreateCartResponse;
+use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Services\CartCreator;
 use App\Tests\Dashboard\Cart\Application\AbstractCartApplicationMock;
 use App\Tests\Dashboard\Cart\Domain\CartItemMother;
@@ -29,8 +29,8 @@ class CreateCartTest extends AbstractCartApplicationMock
             $this->eventBus()
         );
 
-        $createCartResponse = $createCartCase->__invoke($cart);
+        $cartResponse = $createCartCase->__invoke($cart);
 
-        $this->assertEquals(CreateCartResponse::class, $createCartResponse::class);
+        $this->assertEquals(CartResponse::class, $cartResponse::class);
     }
 }

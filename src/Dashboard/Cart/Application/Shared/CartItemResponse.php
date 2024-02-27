@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Dashboard\Cart\Application\CreateCart;
+namespace App\Dashboard\Cart\Application\Shared;
 
-class CreateCartItemResponse
+class CartItemResponse
 {
     public function __construct(
         private string $id,
