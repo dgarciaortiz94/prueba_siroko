@@ -1,0 +1,5 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <embeddable name="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState">
+        <field name="value" column="state" type="integer" />
+    </embeddable>
+</doctrine-mapping>

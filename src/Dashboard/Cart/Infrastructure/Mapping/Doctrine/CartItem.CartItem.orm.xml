@@ -5,6 +5,7 @@
         <many-to-one field="product" target-entity="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProduct">
             <join-column name="product_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
+        <embedded name="state" class="App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState" use-column-prefix="false" />
         <field name="active" column="active" type="boolean" />
     </entity>
 </doctrine-mapping>

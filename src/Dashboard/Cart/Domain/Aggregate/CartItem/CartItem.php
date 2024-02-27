@@ -12,6 +12,8 @@ class CartItem
 
     protected CartItemProduct $product;
 
+    protected CartItemState $state;
+
     protected bool $active;
 
     /**
@@ -28,6 +30,14 @@ class CartItem
     public function tid(): string
     {
         return $this->tid->value();
+    }
+
+    /**
+     * Get the value of state.
+     */
+    public function state(): int
+    {
+        return $this->state->value();
     }
 
     /**
