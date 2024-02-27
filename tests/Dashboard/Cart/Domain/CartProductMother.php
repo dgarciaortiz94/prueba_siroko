@@ -8,6 +8,7 @@ use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProduct
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductPrice;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductTracingCode;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductVariant;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartProductModel\CartProductModel;
 
 class CartProductMother extends CartItemProduct
 {
@@ -17,7 +18,7 @@ class CartProductMother extends CartItemProduct
         string $variant = 'S',
         string $description = 'Talla S',
         float $price = 79.95,
-        CartModelMother $model = null
+        CartProductModel $model = null
     ): self {
         $self = new self();
 
