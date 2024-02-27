@@ -3,7 +3,7 @@
 namespace App\Dashboard\Cart\Domain\Persist;
 
 use App\Dashboard\Cart\Domain\Aggregate\Cart;
-use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProduct;
+use Doctrine\Common\Collections\Collection;
 
 interface ICartRepository
 {
@@ -13,5 +13,5 @@ interface ICartRepository
 
     public function search(string $id): Cart;
 
-    public function searchProduct(string $id): CartItemProduct;
+    public function searchAvailableProductItem(string $productId): Collection;
 }

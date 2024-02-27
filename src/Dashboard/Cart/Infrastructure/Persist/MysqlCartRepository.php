@@ -3,9 +3,11 @@
 namespace App\Dashboard\Cart\Infrastructure\Persist;
 
 use App\Dashboard\Cart\Domain\Aggregate\Cart;
-use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProduct;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Persist\ICartRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 
 class MysqlCartRepository extends ServiceEntityRepository implements ICartRepository
@@ -36,8 +38,11 @@ class MysqlCartRepository extends ServiceEntityRepository implements ICartReposi
         return $this->getEntityManager()->getRepository(Cart::class)->find($id);
     }
 
-    public function searchProduct(string $id): CartItemProduct
+    public function searchAvailableProductItem(string $productId): Collection
     {
-        return $this->getEntityManager()->getRepository(CartItemProduct::class)->find($id);
+        return $this->getEntityManager()->getRepository(CartItem::class)->findBy([
+            'product.id' => $productId,
+            'state' => CartItemState::AVAILABLE,
+        ]);
     }
 }
