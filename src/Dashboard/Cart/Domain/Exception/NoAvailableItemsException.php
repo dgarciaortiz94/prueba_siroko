@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dashboard\Cart\Domain\Services\Exception;
+namespace App\Dashboard\Cart\Domain\Exception;
 
 class NoAvailableItemsException extends \Exception
 {
