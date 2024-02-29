@@ -4,8 +4,8 @@ namespace App\Dashboard\Cart\Domain\Services;
 
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductId;
+use App\Dashboard\Cart\Domain\Exception\NoAvailableItemsException;
 use App\Dashboard\Cart\Domain\Persist\ICartRepository;
-use App\Dashboard\Cart\Domain\Services\Exception\NoAvailableItemsException;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class CartFirstAvailableProductItemFinder
