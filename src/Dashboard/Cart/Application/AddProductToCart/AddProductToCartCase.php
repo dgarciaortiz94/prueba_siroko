@@ -43,7 +43,8 @@ class AddProductToCartCase
                 $item->productVariant(),
                 $item->modelDescription(),
                 $item->productDescription(),
-                $item->tid()
+                $item->tid(),
+                $item->price()
             );
 
             $totalPrice += $item->price();

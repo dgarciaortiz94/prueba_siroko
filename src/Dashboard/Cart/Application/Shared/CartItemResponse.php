@@ -11,7 +11,8 @@ class CartItemResponse
         private string $productVariant,
         private string $modelDescription,
         private string $productDescription,
-        private string $itemTid
+        private string $itemTid,
+        private float $price
     ) {
     }
 
@@ -69,5 +70,13 @@ class CartItemResponse
     public function itemTid(): string
     {
         return $this->itemTid;
+    }
+
+    /**
+     * Get the value of price.
+     */
+    public function price(): float
+    {
+        return $this->price;
     }
 }
