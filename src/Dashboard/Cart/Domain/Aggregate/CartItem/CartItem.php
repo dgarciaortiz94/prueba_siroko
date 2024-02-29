@@ -17,6 +17,16 @@ class CartItem
     protected bool $active;
 
     /**
+     * Change the value of state.
+     */
+    public function changeState(CartItemState $state): int
+    {
+        $this->state = $state;
+
+        return $this->state->value();
+    }
+
+    /**
      * Get the value of id.
      */
     public function id(): string
