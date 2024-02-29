@@ -3,7 +3,10 @@
 namespace App\Dashboard\Cart\Domain\Aggregate;
 
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUser;
+use App\Dashboard\Cart\Domain\Exception\ItemAlreadyInsideCartException;
+use App\Dashboard\Cart\Domain\Exception\ItemNotFoundInsideCartException;
 use App\Shared\Domain\Agregate\AgregateRoot;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,9 +47,24 @@ class Cart extends AgregateRoot
 
     public function addProduct(CartItem $item): self
     {
-        if (!$this->items->contains($item)) {
-            $this->items()->add($item);
+        if ($this->items->contains($item)) {
+            throw new ItemAlreadyInsideCartException();
         }
+
+        $this->items()->add($item);
+        $item->changeState(new CartItemState(CartItemState::AVAILABLE));
+
+        return $this;
+    }
+
+    public function removeProduct(CartItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            throw new ItemNotFoundInsideCartException();
+        }
+
+        $item->changeState(new CartItemState(CartItemState::AVAILABLE));
+        $this->items()->removeElement($item);
 
         return $this;
     }
