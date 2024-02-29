@@ -7,9 +7,9 @@ use App\Dashboard\Cart\Application\AddProductToCart\Services\CartProductAggregat
 use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductId;
+use App\Dashboard\Cart\Domain\Exception\NoAvailableItemsException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartFirstAvailableProductItemFinder;
-use App\Dashboard\Cart\Domain\Services\Exception\NoAvailableItemsException;
 use App\Tests\Dashboard\Cart\Application\AbstractCartApplicationMock;
 use App\Tests\Dashboard\Cart\Domain\CartItemMother;
 use App\Tests\Dashboard\Cart\Domain\CartMother;

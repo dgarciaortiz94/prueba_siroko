@@ -2,8 +2,6 @@
 
 namespace App\Dashboard\Cart\Domain\Services;
 
-use App\Dashboard\Cart\Domain\Aggregate\Cart;
-use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemId;
 use App\Dashboard\Cart\Domain\Persist\ICartRepository;
