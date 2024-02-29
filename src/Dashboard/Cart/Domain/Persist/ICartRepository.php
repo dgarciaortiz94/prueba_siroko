@@ -12,9 +12,9 @@ interface ICartRepository
 
     public function remove(Cart $cart): void;
 
-    public function search(string $id): Cart;
+    public function search(string $id): ?Cart;
 
-    public function searchItem(string $itemId): CartItem;
+    public function searchItem(string $itemId): ?CartItem;
 
     public function searchAvailableProductItem(string $productId): Collection;
 }

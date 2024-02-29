@@ -33,14 +33,14 @@ class MysqlCartRepository extends ServiceEntityRepository implements ICartReposi
         $this->getEntityManager()->flush();
     }
 
-    public function search(string $id): Cart
+    public function search(string $id): ?Cart
     {
-        return $this->getEntityManager()->getRepository(Cart::class)->find($id);
+        return $this->getEntityManager()->getRepository(Cart::class)->find($id) ?? null;
     }
 
-    public function searchItem(string $itemId): CartItem
+    public function searchItem(string $itemId): ?CartItem
     {
-        return $this->getEntityManager()->getRepository(CartItem::class)->find($itemId);
+        return $this->getEntityManager()->getRepository(CartItem::class)->find($itemId) ?? null;
     }
 
     public function searchAvailableProductItem(string $productId): Collection
