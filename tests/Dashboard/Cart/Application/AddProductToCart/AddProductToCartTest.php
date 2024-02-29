@@ -73,7 +73,7 @@ class AddProductToCartTest extends AbstractCartApplicationMock
     /**
      * @test
      */
-    public function shouldReturnHttpNotFoundException()
+    public function shouldReturnNoAvailableItemsException()
     {
         $item = CartItemMother::create(
             product: CartProductMother::create()
