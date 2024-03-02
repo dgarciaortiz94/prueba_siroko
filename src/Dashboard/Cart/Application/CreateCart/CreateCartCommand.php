@@ -6,5 +6,15 @@ use App\Shared\Domain\Bus\Command\ICommand;
 
 class CreateCartCommand implements ICommand
 {
-    public string $productId;
+    public function __construct(private string $productId)
+    {
+    }
+
+    /**
+     * Get the value of productId.
+     */
+    public function productId(): string
+    {
+        return $this->productId;
+    }
 }
