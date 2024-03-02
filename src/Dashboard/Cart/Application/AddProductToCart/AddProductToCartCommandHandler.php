@@ -5,7 +5,9 @@ namespace App\Dashboard\Cart\Application\AddProductToCart;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductId;
 use App\Shared\Domain\Bus\Command\ICommandResponse;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler()]
 class AddProductToCartCommandHandler
 {
     public function __construct(
