@@ -18,3 +18,23 @@ register_user:
     path:       /user
     controller: App\Entrypoint\Controller\Dashboard\User\ApplicationRegisterUserController
     methods:    POST
+
+create_cart:
+    path:       /cart
+    controller: App\Entrypoint\Controller\Dashboard\Cart\CreateCartController
+    methods:    POST
+
+add_product_to_cart:
+    path:       /cart/{cartId}/add-product
+    controller: App\Entrypoint\Controller\Dashboard\Cart\AddProductToCartController
+    methods:    POST
+
+remove_product_from_cart:
+    path:       /cart/{cartId}/remove-product
+    controller: App\Entrypoint\Controller\Dashboard\Cart\RemoveProductFromCartController
+    methods:    POST
+
+confirm_order:
+    path:       /cart/{cartId}/confirm-order
+    controller: App\Entrypoint\Controller\Dashboard\Cart\ConfirmOrderController
+    methods:    POST
