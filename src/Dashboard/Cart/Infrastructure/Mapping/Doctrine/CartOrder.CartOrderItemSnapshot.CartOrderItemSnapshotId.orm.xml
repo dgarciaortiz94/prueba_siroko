@@ -1,0 +1,5 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <embeddable name="App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderItemSnapshot\CartOrderItemSnapshotId">
+        <id name="value" column="id" type="string" />
+    </embeddable>
+</doctrine-mapping>
