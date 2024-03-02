@@ -6,11 +6,13 @@ use App\Dashboard\Cart\Application\ConfirmOrder\ConfirmOrderCase;
 use App\Dashboard\Cart\Application\ConfirmOrder\ConfirmOrderResponse;
 use App\Dashboard\Cart\Application\ConfirmOrder\Services\CartOrderConfirmer;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataAddress;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataComunity;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataLocation;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataZipCode;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderPaymentData\CartOrderPaymentDataCard;
+use App\Dashboard\Cart\Domain\Exception\NoItemsInCartException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Shared\Domain\Services\CurrentUserRecovery;
 use App\Tests\Dashboard\Cart\Application\AbstractCartApplicationMock;
@@ -69,6 +71,52 @@ class ConfirmOrderTest extends AbstractCartApplicationMock
         );
 
         $this->assertEquals(ConfirmOrderResponse::class, $orderResponse::class);
+        $this->assertEquals(CartItemState::SOLD, $cart->items()[0]->state());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNoItemsInCartException()
+    {
+        $item = CartItemMother::create(
+            product: CartProductMother::create()
+        );
+
+        $cart = CartMother::create($item);
+        $cart->removeProduct($item);
+
+        $currentUserRecovery = $this->currentUserRecovery();
+        $repositoryCartFound = $this->repository();
+        $repositoryCartSave = $this->repository();
+
+        $currentUserRecovery
+            ->expects($this->once())
+            ->method('__invoke')
+            ->willReturn(null);
+
+        $repositoryCartFound
+            ->expects($this->once())
+            ->method('search')
+            ->willReturn($cart);
+
+        $confirmOrder = new ConfirmOrderCase(
+            new CartFinder($repositoryCartFound),
+            new CartOrderConfirmer($repositoryCartSave),
+            $this->eventBus(),
+            $currentUserRecovery
+        );
+
+        $this->expectException(NoItemsInCartException::class);
+
+        $confirmOrder->__invoke(
+            new CartId('018dec59-16b4-7529-8953-adf9194d5888'),
+            new CartOrderPaymentDataCard('4485-2465-4898-2545'),
+            new CartOrderAddressDataAddress('Calle Falsa 123'),
+            new CartOrderAddressDataLocation('Alcorcón'),
+            new CartOrderAddressDataComunity('Madrid'),
+            new CartOrderAddressDataZipCode('28015'),
+        );
     }
 
     protected function currentUserRecovery(): CurrentUserRecovery|MockObject
