@@ -7,6 +7,7 @@ use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Persist\ICartRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,18 +20,20 @@ class MysqlCartRepository extends ServiceEntityRepository implements ICartReposi
 
     public function save(Cart $cart): Cart
     {
-        $this->getEntityManager()->persist($cart);
+        $em = $this->getEntityManager();
 
-        $this->getEntityManager()->flush();
+        $em->persist($cart);
+        $em->flush();
 
         return $cart;
     }
 
     public function remove(Cart $cart): void
     {
-        $this->getEntityManager()->remove($cart);
+        $em = $this->getEntityManager();
 
-        $this->getEntityManager()->flush();
+        $em->remove($cart);
+        $em->flush();
     }
 
     public function search(string $id): ?Cart
@@ -45,9 +48,9 @@ class MysqlCartRepository extends ServiceEntityRepository implements ICartReposi
 
     public function searchAvailableProductItem(string $productId): Collection
     {
-        return $this->getEntityManager()->getRepository(CartItem::class)->findBy([
-            'product.id' => $productId,
-            'state' => CartItemState::AVAILABLE,
-        ]);
+        return new ArrayCollection($this->getEntityManager()->getRepository(CartItem::class)->findBy([
+            'product' => $productId,
+            'state.value' => CartItemState::AVAILABLE,
+        ]));
     }
 }
