@@ -16,6 +16,11 @@ class CartItem
 
     protected bool $active;
 
+    public function __construct()
+    {
+        $this->active = true;
+    }
+
     /**
      * Change the value of state.
      */
