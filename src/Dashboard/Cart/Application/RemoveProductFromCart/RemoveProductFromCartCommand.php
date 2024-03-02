@@ -2,7 +2,9 @@
 
 namespace App\Dashboard\Cart\Application\RemoveProductFromCart;
 
-class RemoveProductFromCartCommand
+use App\Shared\Domain\Bus\Command\ICommand;
+
+class RemoveProductFromCartCommand implements ICommand
 {
     public function __construct(
         private string $cartId,
