@@ -5,7 +5,9 @@ namespace App\Dashboard\Cart\Application\RemoveProductFromCart;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemId;
 use App\Shared\Domain\Bus\Command\ICommandResponse;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler()]
 class RemoveProductFromCartCommandHandler
 {
     public function __construct(
