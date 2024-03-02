@@ -19,7 +19,7 @@ class CartItemResponse
     /**
      * Get the value of id.
      */
-    public function id(): string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -27,7 +27,7 @@ class CartItemResponse
     /**
      * Get the value of productTracingCode.
      */
-    public function productTracingCode(): string
+    public function getProductTracingCode(): string
     {
         return $this->productTracingCode;
     }
@@ -35,7 +35,7 @@ class CartItemResponse
     /**
      * Get the value of modelName.
      */
-    public function modelName(): string
+    public function getModelName(): string
     {
         return $this->modelName;
     }
@@ -43,7 +43,7 @@ class CartItemResponse
     /**
      * Get the value of productVariant.
      */
-    public function productVariant(): string
+    public function getProductVariant(): string
     {
         return $this->productVariant;
     }
@@ -51,7 +51,7 @@ class CartItemResponse
     /**
      * Get the value of modelDescription.
      */
-    public function modelDescription(): string
+    public function getModelDescription(): string
     {
         return $this->modelDescription;
     }
@@ -59,7 +59,7 @@ class CartItemResponse
     /**
      * Get the value of productDescription.
      */
-    public function productDescription(): string
+    public function getProductDescription(): string
     {
         return $this->productDescription;
     }
@@ -67,7 +67,7 @@ class CartItemResponse
     /**
      * Get the value of itemTid.
      */
-    public function itemTid(): string
+    public function getItemTid(): string
     {
         return $this->itemTid;
     }
@@ -75,7 +75,7 @@ class CartItemResponse
     /**
      * Get the value of price.
      */
-    public function price(): float
+    public function getPrice(): float
     {
         return $this->price;
     }

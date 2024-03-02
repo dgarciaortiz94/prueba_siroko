@@ -19,7 +19,7 @@ class CartResponse implements ICommandResponse
     /**
      * Get the value of cartId.
      */
-    public function cartId(): string
+    public function getCartId(): string
     {
         return $this->cartId;
     }
@@ -27,7 +27,7 @@ class CartResponse implements ICommandResponse
     /**
      * Get the value of items.
      */
-    public function items(): array
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -35,7 +35,7 @@ class CartResponse implements ICommandResponse
     /**
      * Get the value of total.
      */
-    public function total(): float
+    public function getTotal(): float
     {
         return $this->total;
     }
