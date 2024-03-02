@@ -7,6 +7,7 @@ use App\Dashboard\Cart\Application\AddProductToCart\Services\CartProductAggregat
 use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductId;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Exception\NoAvailableItemsException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartFirstAvailableProductItemFinder;
@@ -66,8 +67,9 @@ class AddProductToCartTest extends AbstractCartApplicationMock
         );
 
         $this->assertEquals(CartResponse::class, $cartResponse::class);
-        $this->assertCount(2, $cartResponse->items());
-        $this->assertEquals($item2Id, $cartResponse->items()[1]->id());
+        $this->assertCount(2, $cartResponse->getItems());
+        $this->assertEquals($item2Id, $cartResponse->getItems()[1]->getId());
+        $this->assertEquals(CartItemState::RESERVED, $cart->items()[1]->state());
     }
 
     /**

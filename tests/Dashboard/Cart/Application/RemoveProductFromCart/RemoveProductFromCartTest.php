@@ -7,6 +7,7 @@ use App\Dashboard\Cart\Application\RemoveProductFromCart\Services\CartProductRem
 use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemId;
+use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Exception\ItemNotFoundInsideCartException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartItemFinder;
@@ -54,13 +55,16 @@ class RemoveProductFromCartTest extends AbstractCartApplicationMock
             $this->eventBus()
         );
 
+        $cartItem = $cart->items()[0];
+
         $cartResponse = $removeItemFromCartCase->__invoke(
             new CartId($cart->items()[0]->id()),
             new CartItemId('018dec59-4f24-7e39-8d82-e73c7be3ca24')
         );
 
         $this->assertEquals(CartResponse::class, $cartResponse::class);
-        $this->assertCount(0, $cartResponse->items());
+        $this->assertCount(0, $cartResponse->getItems());
+        $this->assertEquals(CartItemState::AVAILABLE, $cartItem->state());
     }
 
     /**
