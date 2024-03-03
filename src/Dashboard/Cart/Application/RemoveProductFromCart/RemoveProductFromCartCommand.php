@@ -3,11 +3,13 @@
 namespace App\Dashboard\Cart\Application\RemoveProductFromCart;
 
 use App\Shared\Domain\Bus\Command\ICommand;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class RemoveProductFromCartCommand implements ICommand
 {
     public function __construct(
-        private string $cartId,
+        private ?string $cartId,
+        #[Assert\NotNull(), Assert\Type('string')]
         private string $itemId
     ) {
     }
@@ -18,6 +20,16 @@ class RemoveProductFromCartCommand implements ICommand
     public function cartId(): string
     {
         return $this->cartId;
+    }
+
+    /**
+     * Set the value of cartId.
+     */
+    public function setCartId(string $cartId): self
+    {
+        $this->cartId = $cartId;
+
+        return $this;
     }
 
     /**

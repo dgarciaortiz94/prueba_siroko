@@ -3,11 +3,13 @@
 namespace App\Dashboard\Cart\Application\AddProductToCart;
 
 use App\Shared\Domain\Bus\Command\ICommand;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AddProductToCartCommand implements ICommand
 {
     public function __construct(
-        private string $cartId,
+        public ?string $cartId,
+        #[Assert\NotNull(), Assert\Type('string')]
         private string $productId
     ) {
     }
@@ -18,6 +20,16 @@ class AddProductToCartCommand implements ICommand
     public function cartId(): string
     {
         return $this->cartId;
+    }
+
+    /**
+     * Set the value of cartId.
+     */
+    public function setCartId(string $cartId): self
+    {
+        $this->cartId = $cartId;
+
+        return $this;
     }
 
     /**
