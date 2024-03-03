@@ -18,7 +18,8 @@
 * [Instalar Docker](https://www.docker.com/get-started/)
 * Clonar el repositorio: `git clone https://github.com/dgarciaortiz94/prueba_siroko.git`
 * Posicionarte en el directorio prueba_siroko: `cd prueba_siroko`
-* Ejecutar `make build` y esperar a que se descarguen todas las imágenes y dependencias
+* Ejecutar `make build` y esperar a que se levanten los contenedores
+* Ejecutar `make install` y esperar a que se descarguen todas las dependencias
 * Adicionalmente puedes ejecutar los test mediante `make test`
 
 ## Comandos de despliegue
