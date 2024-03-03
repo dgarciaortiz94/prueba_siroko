@@ -5,20 +5,20 @@ namespace App\Dashboard\Cart\Application\CreateCart;
 use App\Dashboard\Cart\Application\Shared\CartItemResponse;
 use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\Cart;
-use App\Dashboard\Cart\Domain\Services\CartCreator;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Shared\Domain\Bus\DomainEvent\IDomainEventBus;
 
 class CreateCartCase
 {
     public function __construct(
-        private CartCreator $cartCreator,
+        private CartPersister $cartPersister,
         private IDomainEventBus $domainEventBus
     ) {
     }
 
     public function __invoke(Cart $cart): CartResponse
     {
-        $cart = $this->cartCreator->__invoke($cart);
+        $cart = $this->cartPersister->__invoke($cart);
 
         // $this->domainEventBus->publish(...$cart->pullDomainEvents());
 

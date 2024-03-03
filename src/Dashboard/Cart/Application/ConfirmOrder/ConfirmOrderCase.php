@@ -2,7 +2,6 @@
 
 namespace App\Dashboard\Cart\Application\ConfirmOrder;
 
-use App\Dashboard\Cart\Application\ConfirmOrder\Services\CartOrderConfirmer;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataAddress;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataComunity;
@@ -10,8 +9,8 @@ use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrder
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrderAddressDataZipCode;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderItemSnapshot\CartOrderItemSnapshot;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderPaymentData\CartOrderPaymentDataCard;
-use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderUser\CartOrderUserId;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Shared\Domain\Bus\DomainEvent\IDomainEventBus;
 use App\Shared\Domain\Services\CurrentUserRecovery;
 
@@ -19,7 +18,7 @@ class ConfirmOrderCase
 {
     public function __construct(
         private CartFinder $cartFinder,
-        private CartOrderConfirmer $cartOrderConfirmer,
+        private CartPersister $cartPersister,
         private IDomainEventBus $domainEventBus,
         private CurrentUserRecovery $currentUserRecovery
     ) {
@@ -33,6 +32,7 @@ class ConfirmOrderCase
         CartOrderAddressDataComunity $shipmentComunity,
         CartOrderAddressDataZipCode $shipmentZipCode
     ): ConfirmOrderResponse {
+        $user = $this->currentUserRecovery->__invoke();
         $cart = $this->cartFinder->__invoke($cartId);
 
         $order = $cart->createOrder(
@@ -41,10 +41,10 @@ class ConfirmOrderCase
             $shipmentComunity,
             $shipmentZipCode,
             $paymentCard,
-            ($user = $this->currentUserRecovery->__invoke()) ? new CartOrderUserId($user->getUserIdentifier()) : null
+            $user
         );
 
-        $this->cartOrderConfirmer->__invoke($cart);
+        $this->cartPersister->__invoke($cart);
 
         return new ConfirmOrderResponse(
             new ConfirmOrderShipmentAddressResponse(

@@ -15,6 +15,7 @@ use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderPaymentData\CartOrder
 use App\Dashboard\Cart\Domain\Exception\NoItemsInCartException;
 use App\Dashboard\Cart\Domain\Exception\OrderAlreadyCreatedForThisCartException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Shared\Domain\Services\CurrentUserRecovery;
 use App\Shared\Domain\Validation\Payment\InvalidPaymentCardException;
 use App\Tests\Dashboard\Cart\Application\AbstractCartApplicationMock;
@@ -58,7 +59,7 @@ class ConfirmOrderTest extends AbstractCartApplicationMock
 
         $confirmOrder = new ConfirmOrderCase(
             new CartFinder($repositoryCartFound),
-            new CartOrderConfirmer($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus(),
             $currentUserRecovery
         );
@@ -104,7 +105,7 @@ class ConfirmOrderTest extends AbstractCartApplicationMock
 
         $confirmOrder = new ConfirmOrderCase(
             new CartFinder($repositoryCartFound),
-            new CartOrderConfirmer($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus(),
             $currentUserRecovery
         );
@@ -132,7 +133,7 @@ class ConfirmOrderTest extends AbstractCartApplicationMock
 
         $confirmOrder = new ConfirmOrderCase(
             new CartFinder($repositoryCartFound),
-            new CartOrderConfirmer($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus(),
             $currentUserRecovery
         );
@@ -180,7 +181,7 @@ class ConfirmOrderTest extends AbstractCartApplicationMock
 
         $confirmOrder = new ConfirmOrderCase(
             new CartFinder($repositoryCartFound),
-            new CartOrderConfirmer($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus(),
             $currentUserRecovery
         );

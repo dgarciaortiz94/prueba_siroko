@@ -11,6 +11,7 @@ use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Exception\NoAvailableItemsException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartFirstAvailableProductItemFinder;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Tests\Dashboard\Cart\Application\AbstractCartApplicationMock;
 use App\Tests\Dashboard\Cart\Domain\CartItemMother;
 use App\Tests\Dashboard\Cart\Domain\CartMother;
@@ -57,7 +58,7 @@ class AddProductToCartTest extends AbstractCartApplicationMock
         $addItemToCartCase = new AddProductToCartCase(
             new CartFinder($repositoryCartFound),
             new CartFirstAvailableProductItemFinder($repositoryProductEmptyReturn),
-            new CartProductAggregator($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus()
         );
 
@@ -98,7 +99,7 @@ class AddProductToCartTest extends AbstractCartApplicationMock
         $addItemToCartCase = new AddProductToCartCase(
             new CartFinder($repositoryCartFound),
             new CartFirstAvailableProductItemFinder($repositoryProductEmptyReturn),
-            new CartProductAggregator($this->repository()),
+            new CartPersister($this->repository()),
             $this->eventBus()
         );
 

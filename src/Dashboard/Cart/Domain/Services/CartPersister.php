@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Dashboard\Cart\Application\AddProductToCart\Services;
+namespace App\Dashboard\Cart\Domain\Services;
 
 use App\Dashboard\Cart\Domain\Aggregate\Cart;
 use App\Dashboard\Cart\Domain\Persist\ICartRepository;
 
-class CartProductAggregator
+class CartPersister
 {
     public function __construct(
         private ICartRepository $repository

@@ -2,13 +2,13 @@
 
 namespace App\Dashboard\Cart\Application\RemoveProductFromCart;
 
-use App\Dashboard\Cart\Application\RemoveProductFromCart\Services\CartProductRemover;
 use App\Dashboard\Cart\Application\Shared\CartItemResponse;
 use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemId;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartItemFinder;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Shared\Domain\Bus\DomainEvent\IDomainEventBus;
 
 class RemoveProductFromCartCase
@@ -16,7 +16,7 @@ class RemoveProductFromCartCase
     public function __construct(
         private CartFinder $cartFinder,
         private CartItemFinder $itemFinder,
-        private CartProductRemover $cartProductRemover,
+        private CartPersister $cartPersister,
         private IDomainEventBus $domainEventBus
     ) {
     }
@@ -28,7 +28,7 @@ class RemoveProductFromCartCase
 
         $cart->removeProduct($item);
 
-        $cart = $this->cartProductRemover->__invoke($cart);
+        $cart = $this->cartPersister->__invoke($cart);
 
         // $this->domainEventBus->publish(...$cart->pullDomainEvents());
 

@@ -11,6 +11,7 @@ use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemState;
 use App\Dashboard\Cart\Domain\Exception\ItemNotFoundInsideCartException;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartItemFinder;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Tests\Dashboard\Cart\Application\AbstractCartApplicationMock;
 use App\Tests\Dashboard\Cart\Domain\CartItemMother;
 use App\Tests\Dashboard\Cart\Domain\CartMother;
@@ -51,7 +52,7 @@ class RemoveProductFromCartTest extends AbstractCartApplicationMock
         $removeItemFromCartCase = new RemoveProductFromCartCase(
             new CartFinder($repositoryCartFound),
             new CartItemFinder($repositoryItemFound),
-            new CartProductRemover($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus()
         );
 
@@ -100,7 +101,7 @@ class RemoveProductFromCartTest extends AbstractCartApplicationMock
         $addItemToCartCase = new RemoveProductFromCartCase(
             new CartFinder($repositoryCartFound),
             new CartItemFinder($repositoryItemFound),
-            new CartProductRemover($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus()
         );
 
@@ -140,7 +141,7 @@ class RemoveProductFromCartTest extends AbstractCartApplicationMock
         $addItemToCartCase = new RemoveProductFromCartCase(
             new CartFinder($repositoryCartFound),
             new CartItemFinder($repositoryNoItemFound),
-            new CartProductRemover($repositoryCartSave),
+            new CartPersister($repositoryCartSave),
             $this->eventBus()
         );
 

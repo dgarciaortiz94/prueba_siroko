@@ -2,13 +2,13 @@
 
 namespace App\Dashboard\Cart\Application\AddProductToCart;
 
-use App\Dashboard\Cart\Application\AddProductToCart\Services\CartProductAggregator;
 use App\Dashboard\Cart\Application\Shared\CartItemResponse;
 use App\Dashboard\Cart\Application\Shared\CartResponse;
 use App\Dashboard\Cart\Domain\Aggregate\CartId;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItemProduct\CartItemProductId;
 use App\Dashboard\Cart\Domain\Services\CartFinder;
 use App\Dashboard\Cart\Domain\Services\CartFirstAvailableProductItemFinder;
+use App\Dashboard\Cart\Domain\Services\CartPersister;
 use App\Shared\Domain\Bus\DomainEvent\IDomainEventBus;
 
 class AddProductToCartCase
@@ -16,7 +16,7 @@ class AddProductToCartCase
     public function __construct(
         private CartFinder $cartFinder,
         private CartFirstAvailableProductItemFinder $itemFinder,
-        private CartProductAggregator $cartProductAggregator,
+        private CartPersister $cartPersister,
         private IDomainEventBus $domainEventBus
     ) {
     }
@@ -28,7 +28,7 @@ class AddProductToCartCase
 
         $cart->addProduct($item);
 
-        $cart = $this->cartProductAggregator->__invoke($cart);
+        $cart = $this->cartPersister->__invoke($cart);
 
         // $this->domainEventBus->publish(...$cart->pullDomainEvents());
 
