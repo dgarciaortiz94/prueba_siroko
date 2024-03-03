@@ -4,7 +4,6 @@
 /.env.test
 /.env.local.php
 /.env.*.local
-/.docker/mysql/entrypoint
 /.vscode
 /config/secret
 /config/secrets/prod/prod.decrypt.private.php
