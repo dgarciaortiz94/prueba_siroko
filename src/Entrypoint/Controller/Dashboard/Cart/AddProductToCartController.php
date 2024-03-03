@@ -6,20 +6,21 @@ use App\Dashboard\Cart\Application\AddProductToCart\AddProductToCartCommand;
 use App\Dashboard\Cart\Domain\Exception\NoAvailableItemsException;
 use App\Shared\Infrastructure\Symfony\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AddProductToCartController extends BaseController
 {
-    public function __invoke(Request $request, string $cartId): JsonResponse
-    {
-        $data = json_decode($request->getContent());
+    public function __invoke(
+        string $cartId,
+        #[MapRequestPayload(
+            validationFailedStatusCode: JsonResponse::HTTP_BAD_REQUEST
+        )] AddProductToCartCommand $addProductToCartCommand
+    ): JsonResponse {
+        $addProductToCartCommand->setCartId($cartId);
 
         try {
-            $response = $this->dispatch(new AddProductToCartCommand(
-                $cartId,
-                $data->productId,
-            ));
+            $response = $this->dispatch($addProductToCartCommand);
         } catch (NoAvailableItemsException|NotFoundHttpException $e) {
             return $this->json(
                 ['message' => $e->getMessage()],
