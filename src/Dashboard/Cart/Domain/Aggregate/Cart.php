@@ -67,6 +67,10 @@ class Cart extends AgregateRoot
         CartOrderPaymentDataCard $card,
         User $user = null
     ): CartOrder {
+        if ($this->order) {
+            throw new OrderAlreadyCreatedForThisCartException();
+        }
+
         if (0 === count($this->items)) {
             throw new NoItemsInCartException();
         }
