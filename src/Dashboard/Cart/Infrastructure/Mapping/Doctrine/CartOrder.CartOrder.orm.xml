@@ -26,7 +26,7 @@
                 <cascade-persist/>
             </cascade>
         </one-to-one>
-        <many-to-one field="user" target-entity="App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderUser\CartOrderUser">
+        <many-to-one field="user" target-entity="App\Dashboard\User\Domain\Agregate\User">
             <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </entity>

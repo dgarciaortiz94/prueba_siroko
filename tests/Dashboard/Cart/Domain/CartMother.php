@@ -4,7 +4,7 @@ namespace App\Tests\Dashboard\Cart\Domain;
 
 use App\Dashboard\Cart\Domain\Aggregate\Cart;
 use App\Dashboard\Cart\Domain\Aggregate\CartItem\CartItem;
-use App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUser;
+use App\Dashboard\User\Domain\Agregate\User;
 
 class CartMother
 {
@@ -12,7 +12,7 @@ class CartMother
 
     private function __construct(
         CartItem $item,
-        CartUser $user = null
+        User $user = null
     ) {
         $this->cart = Cart::create(
             $item,
@@ -22,7 +22,7 @@ class CartMother
 
     public static function create(
         CartItem $item,
-        CartUser $user = null
+        User $user = null
     ): Cart {
         $self = new self(
             $item,

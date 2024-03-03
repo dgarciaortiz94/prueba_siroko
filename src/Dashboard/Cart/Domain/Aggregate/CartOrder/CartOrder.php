@@ -10,8 +10,7 @@ use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrder
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderItemSnapshot\CartOrderItemSnapshot;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderPaymentData\CartOrderPaymentData;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderPaymentData\CartOrderPaymentDataCard;
-use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderUser\CartOrderUser;
-use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderUser\CartOrderUserId;
+use App\Dashboard\User\Domain\Agregate\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -25,7 +24,7 @@ class CartOrder
 
     private CartOrderPaymentData $paymentData;
 
-    private ?CartOrderUser $user;
+    private ?User $user;
 
     private \DateTimeInterface $createdAt;
 
@@ -42,7 +41,7 @@ class CartOrder
         CartOrderAddressDataComunity $shipmenComunity,
         CartOrderAddressDataZipCode $shipmenZipCode,
         CartOrderPaymentDataCard $card,
-        CartOrderUserId $userId = null,
+        User $user = null,
         ?CartOrderItemSnapshot ...$itemSnapshots
     ): self {
         $self = new self();
@@ -55,7 +54,7 @@ class CartOrder
             $shipmenZipCode
         );
         $self->paymentData = CartOrderPaymentData::create($card);
-        $self->user = ($userId) ? CartOrderUser::create($userId) : null;
+        $self->user = $user;
 
         return $self;
     }

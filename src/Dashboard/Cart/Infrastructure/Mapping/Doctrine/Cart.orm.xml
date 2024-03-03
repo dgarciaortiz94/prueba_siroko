@@ -11,11 +11,11 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <many-to-one field="user" target-entity="App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUser">
+        <many-to-one field="user" target-entity="App\Dashboard\User\Domain\Agregate\User">
             <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
         <one-to-one field="order" target-entity="App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrder">
-            <join-column name="order_id" referenced-column-name="id" />
+            <join-column name="order_id" referenced-column-name="id" unique="true" />
             <cascade>
                 <cascade-persist/>
             </cascade>

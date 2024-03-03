@@ -12,30 +12,30 @@ use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderAddressData\CartOrder
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderItemSnapshot\CartOrderItemSnapshot;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderItemSnapshot\CartOrderItemSnapshotPrice;
 use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderPaymentData\CartOrderPaymentDataCard;
-use App\Dashboard\Cart\Domain\Aggregate\CartOrder\CartOrderUser\CartOrderUserId;
-use App\Dashboard\Cart\Domain\Aggregate\CartUser\CartUser;
 use App\Dashboard\Cart\Domain\Exception\ItemAlreadyInsideCartException;
 use App\Dashboard\Cart\Domain\Exception\ItemNotFoundInsideCartException;
 use App\Dashboard\Cart\Domain\Exception\NoItemsInCartException;
+use App\Dashboard\Cart\Domain\Exception\OrderAlreadyCreatedForThisCartException;
+use App\Dashboard\User\Domain\Agregate\User;
 use App\Shared\Domain\Agregate\AgregateRoot;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 class Cart extends AgregateRoot
 {
-    private CartId $id;
+    protected CartId $id;
 
-    private Collection $items;
+    protected Collection $items;
 
-    private ?CartUser $user;
+    protected ?User $user;
 
-    private ?CartOrder $order;
+    protected ?CartOrder $order = null;
 
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
-    private \DateTimeInterface $updatedAt;
+    protected \DateTimeInterface $updatedAt;
 
-    private bool $active;
+    protected bool $active;
 
     private function __construct()
     {
@@ -48,7 +48,7 @@ class Cart extends AgregateRoot
 
     public static function create(
         CartItem $item,
-        CartUser $user = null
+        User $user = null
     ): self {
         $self = new Cart();
 
@@ -65,7 +65,7 @@ class Cart extends AgregateRoot
         CartOrderAddressDataComunity $shipmenComunity,
         CartOrderAddressDataZipCode $shipmenZipCode,
         CartOrderPaymentDataCard $card,
-        CartOrderUserId $userId = null
+        User $user = null
     ): CartOrder {
         if (0 === count($this->items)) {
             throw new NoItemsInCartException();
@@ -86,7 +86,7 @@ class Cart extends AgregateRoot
             $shipmenComunity,
             $shipmenZipCode,
             $card,
-            $userId,
+            $user,
             ...$itemSnapshots
         );
 
@@ -136,7 +136,7 @@ class Cart extends AgregateRoot
     /**
      * Get the value of user.
      */
-    public function user(): CartUser
+    public function user(): User
     {
         return $this->user;
     }
