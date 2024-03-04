@@ -18,6 +18,9 @@ build: ## Build the container
 make install: ## Install dependencies
 	docker exec --user ${UID} ${SERVICE_CONTAINER_NAME} sh -c "cd /var/www/html/${SERVICE_CONTAINER_NAME} && composer install"
 
+make generate-kwt-keypair: ## Generate JWT private and public keys
+	docker exec --user ${UID} ${SERVICE_CONTAINER_NAME} sh -c "cd /var/www/html/${SERVICE_CONTAINER_NAME} && php bin/console dashboard:jwt:generate-keypair"
+
 start: ## Start the container
 	U_ID=${UID} docker-compose up -d
 
