@@ -20,6 +20,7 @@
 * Posicionarte en el directorio prueba_siroko: `cd prueba_siroko`
 * Ejecutar `make build` y esperar a que se levanten los contenedores
 * Ejecutar `make install` y esperar a que se descarguen todas las dependencias
+* Ejecutar `make generate-kwt-keypair` para generar las claves pública y privada de jwt
 * Adicionalmente puedes ejecutar los test mediante `make test`
 
 ## Comandos de despliegue
