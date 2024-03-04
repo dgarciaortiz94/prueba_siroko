@@ -5,7 +5,8 @@
 /.env.local.php
 /.env.*.local
 /.vscode
-/config/secret
+/config/secret/jwt/private_key.pem
+/config/secret/jwt/public_key.pem
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
